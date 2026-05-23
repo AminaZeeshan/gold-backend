@@ -21,7 +21,8 @@ if (req.query.checkStats === 'true') {
 
     try {
         // 2. Fetch from GoldAPI using your HIDDEN environment variable
-        const response = await fetch("https://www.goldapi.io/api/XAU/USD", {
+   const currency = req.query.currency || "USD";
+const response = await fetch(`https://www.goldapi.io/api/XAU/${currency}`, {
             headers: {
                 "x-access-token": process.env.GOLD_API_KEY,
                 "Content-Type": "application/json"
