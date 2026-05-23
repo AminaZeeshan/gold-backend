@@ -1,5 +1,14 @@
 export default async function handler(req, res) {
     // 1. Enable CORS (Allows your frontend to talk to this backend)
+
+    // Add this inside your handler function
+if (req.query.checkStats === 'true') {
+    const statRes = await fetch("https://www.goldapi.io/api/stat", {
+        headers: { "x-access-token": process.env.GOLD_API_KEY }
+    });
+    const statData = await statRes.json();
+    return res.status(200).json(statData);
+}
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
