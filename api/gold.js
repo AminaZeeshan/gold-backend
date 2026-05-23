@@ -22,6 +22,15 @@ if (req.query.checkStats === 'true') {
     try {
         // 2. Fetch from GoldAPI using your HIDDEN environment variable
    const currency = req.query.currency || "USD";
+const date = req.query.date || "";  // e.g. "20250520"
+
+const url = date
+    ? `https://www.goldapi.io/api/XAU/${currency}/${date}`
+    : `https://www.goldapi.io/api/XAU/${currency}`;
+
+const response = await fetch(url, {
+    headers: { "x-access-token": process.env.GOLD_API_KEY }
+});
 const response = await fetch(`https://www.goldapi.io/api/XAU/${currency}`, {
             headers: {
                 "x-access-token": process.env.GOLD_API_KEY,
