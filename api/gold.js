@@ -1,13 +1,9 @@
 export default async function handler(req, res) {
-
-    // ✅ CORS — must be the very first thing, before anything else
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, OPTIONS');
     res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-    if (req.method === 'OPTIONS') {
-        return res.status(200).end();
-    }
+    if (req.method === 'OPTIONS') return res.status(200).end();
 
     try {
         const currency = req.query.currency || "USD";
@@ -26,7 +22,12 @@ export default async function handler(req, res) {
 
         const data = await response.json();
 
-        res.setHeader('Cache-Control', 's-maxage=43200, stale-while-revalidate');
+      
+        if (date) {
+            res.setHeader('Cache-Control', 's-maxage=31536000'); 
+            res.setHeader('Cache-Control', 's-maxage=43200, stale-while-revalidate'); 
+        }
+
         return res.status(200).json(data);
 
     } catch (error) {
