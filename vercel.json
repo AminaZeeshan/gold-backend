@@ -1,0 +1,7 @@
+{
+    "functions": {
+        "api/gold.js": {
+            "runtime": "nodejs20.x"
+        }
+    }
+}
