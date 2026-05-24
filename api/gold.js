@@ -8,8 +8,7 @@ export default async function handler(req, res) {
         const currency = req.query.currency || "USD";
         const date     = req.query.date || "";
 
-        // ✅ gold-api.com — free, no key, no limit
-        const goldRes  = await fetch("https://gold-api.com/price/XAU", {
+     const goldRes = await fetch("https://api.gold-api.com/price/XAU", {
             headers: { "Accept": "application/json" }
         });
 
